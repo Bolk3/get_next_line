@@ -6,7 +6,7 @@
 /*   By: resonnet <renald.sonnet@learner.42.tech>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/10 19:51:09 by resonnet          #+#    #+#             */
-/*   Updated: 2026/11/10 20:26:10 by resonnet         ###   ########.fr       */
+/*   Updated: 2026/11/11 10:12:42 by resonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #  define BUFFER_SIZE 10
 # endif
 
+void	set_string(char *string, char *stack, char *buffer);
 int		ft_strcmp(char *s1, char *s2);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);

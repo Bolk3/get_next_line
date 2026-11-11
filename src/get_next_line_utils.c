@@ -6,13 +6,33 @@
 /*   By: resonnet <renald.sonnet@learner.42.tech>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/10 20:18:45 by resonnet          #+#    #+#             */
-/*   Updated: 2026/11/10 20:24:17 by resonnet         ###   ########.fr       */
+/*   Updated: 2026/11/11 12:34:52 by resonnet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <get_next_line.h>
+#include "get_next_line.h"
 #include <stddef.h>
 #include <stdlib.h>
+
+void	set_string(char *string, char *stack, char *buffer)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (stack && stack[i])
+	{
+		string[i] = stack[i];
+		i++;
+	}
+	while (buffer[j])
+	{
+		string[i + j] = buffer[j];
+		j++;
+	}
+	string[i + j] = 0;
+}
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -43,8 +63,11 @@ char	*ft_strdup(const char *s)
 	result = malloc(ft_strlen(s) + 1);
 	if (!result)
 		return (NULL);
-	while (s[i++])
+	while (s[i])
+	{
 		result[i] = s[i];
+		i++;
+	}
 	result[i] = 0;
 	return (result);
 }
