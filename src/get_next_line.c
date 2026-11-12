@@ -15,7 +15,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/types.h>
 #include <unistd.h>
 
 int	is_line(const char *s)
@@ -85,7 +84,7 @@ char	*remove_start(char *stack)
 
 char	*get_next_line(int fd)
 {
-	static char	*stack = NULL;
+	static char	*stack[1024] = {NULL};
 	ssize_t		read_size;
 	char		buffer[BUFFER_SIZE + 1];
 	char		*result;
@@ -94,14 +93,14 @@ char	*get_next_line(int fd)
 	while (read_size > 0)
 	{
 		buffer[read_size] = 0;
-		stack = concatenate(stack, buffer);
-		if (!stack)
+		stack[fd] = concatenate(stack[fd], buffer);
+		if (!stack[fd])
 			return (NULL);
-		if (is_line(stack) != -1)
+		if (is_line(stack[fd]) != -1)
 			break ;
 		read_size = read(fd, buffer, BUFFER_SIZE);
 	}
-	result = get_line(stack);
-	stack = remove_start(stack);
+	result = get_line(stack[fd]);
+	stack[fd] = remove_start(stack[fd]);
 	return (result);
 }
